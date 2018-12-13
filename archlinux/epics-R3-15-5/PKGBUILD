@@ -1,0 +1,30 @@
+# Maintainer: Ryan Herbst
+pkgname=epics
+pkgver=3.15.5
+pkgrel=2
+pkgdesc="Experimental Physics and Industrial Control System"
+arch=('any')
+url="http://www.aps.anl.gov/epics/"
+license=('EPICS Open License')
+
+#makedepends=('rpcsvc-proto')
+#depends=('aravis' 'glibmm' 'libtirpc')
+
+source=("https://epics.anl.gov/download/base/base-3.15.5.tar.gz"
+        "epics.patch")
+md5sums=('f2703b97f2c375431074a39019d86ad7'
+         '9eb3180f3d89fafc6b6b287104cd4ecc')
+
+prepare() {
+   cd "${srcdir}/base-${pkgver}"
+   patch -Np1 -i "${srcdir}/epics.patch"
+}
+
+package() {
+   mkdir -p "${pkgdir}/opt/"
+   mkdir -p "${pkgdir}/opt/epics"
+   rsync -ra "${srcdir}/base-${pkgver}" "${pkgdir}/opt/epics/base"
+   cd "${pkgdir}/opt/epics/base"
+   make
+}
+
