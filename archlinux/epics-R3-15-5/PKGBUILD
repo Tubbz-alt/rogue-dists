@@ -23,7 +23,7 @@ prepare() {
 package() {
    mkdir -p "${pkgdir}/opt/"
    mkdir -p "${pkgdir}/opt/epics"
-   rsync -ra "${srcdir}/base-${pkgver}" "${pkgdir}/opt/epics/base"
+   rsync -a --delete "${srcdir}/base-${pkgver}/" "${pkgdir}/opt/epics/base"
    cd "${pkgdir}/opt/epics/base"
    make
 }
