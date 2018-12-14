@@ -1,0 +1,41 @@
+# Maintainer: Ryan Herbst
+pkgname=rogue
+pkgrel=1
+pkgver=3.0.2
+pkgdesc="SLAC Rogue"
+arch=('any')
+url="https://github.com/slaclab/rogue"
+license=('SLAC Open License')
+
+makedepends=('cmake' 'python3' 'boost' 'bzip2')
+depends=('python3' 'boost' 'bzip2' 'python-pip' 'zeromq' 'python-pyqt5' 'python-pyaml' 'python-pyro' 'python-parse' 'python-click' 'python-pyzmq' 'python-numpy')
+
+source=("git+https://github.com/slaclab/rogue.git"
+        "rogue.patch")
+
+md5sums=('SKIP'
+         'SKIP')
+
+pkgver() {
+   cd "${srcdir}/${pkgname}"
+   git describe --tags | sed 's/^v//'
+}
+
+prepare() {
+   cd "${srcdir}/${pkgname}"
+   patch -Np1 -i "${srcdir}/rogue.patch"
+}
+
+build() {
+   cd "${srcdir}/${pkgname}"
+   mkdir -p build
+   cd build
+   cmake .. -DROGUE_INSTALL=system -DROGUE_DIR=/usr -DPKG_DIR=${pkgdir}
+   make -j 4
+}
+
+package() {
+   cd "${srcdir}/${pkgname}/build"
+   make install
+}
+
