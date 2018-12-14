@@ -1,0 +1,31 @@
+--- rogue_old/CMakeLists.txt	2018-12-13 15:57:58.404870091 -0800
++++ rogue_new/CMakeLists.txt	2018-12-13 16:07:42.791518920 -0800
+@@ -272,8 +272,8 @@
+ #####################################
+ 
+ # Always install core libraries and config files
+-install(TARGETS rogue-core LIBRARY DESTINATION ${ROGUE_DIR}/lib)
+-install(FILES   ${PROJECT_BINARY_DIR}/RogueConfig.cmake DESTINATION ${ROGUE_DIR}/lib)
++install(TARGETS rogue-core LIBRARY DESTINATION ${PKG_DIR}/${ROGUE_DIR}/lib)
++install(FILES   ${PROJECT_BINARY_DIR}/RogueConfig.cmake DESTINATION ${PKG_DIR}/${ROGUE_DIR}/lib)
+ 
+ # Copy setup files for local or custom
+ if ((${ROGUE_INSTALL} STREQUAL "custom") OR (${ROGUE_INSTALL} STREQUAL "local"))
+@@ -283,7 +283,7 @@
+ # Install header files for non local installs
+ if (NOT (${ROGUE_INSTALL} STREQUAL "local"))
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/rogue
+-           DESTINATION ${ROGUE_DIR}/include FILES_MATCHING PATTERN "*.h")
++           DESTINATION ${PKG_DIR}/${ROGUE_DIR}/include FILES_MATCHING PATTERN "*.h")
+ endif()
+ 
+ # Python file install
+@@ -296,7 +296,7 @@
+ 
+    # Use setuptools with python3 for system
+    elseif (${ROGUE_INSTALL} STREQUAL "system")
+-      install(CODE "execute_process(COMMAND python3 ${PROJECT_SOURCE_DIR}/build/setup.py install)")
++      install(CODE "execute_process(COMMAND python3 ${PROJECT_SOURCE_DIR}/build/setup.py install --root=${PKG_DIR}/)")
+    
+    # Use setuptools with python for anaconda
+    elseif (${ROGUE_INSTALL} STREQUAL "conda")

@@ -1,7 +1,7 @@
 # Maintainer: Ryan Herbst
 pkgname=rogue
 pkgrel=1
-pkgver=3.0.2
+pkgver=3.0.2.39.g52a82de
 pkgdesc="SLAC Rogue"
 arch=('any')
 url="https://github.com/slaclab/rogue"
@@ -23,6 +23,7 @@ pkgver() {
 
 prepare() {
    cd "${srcdir}/${pkgname}"
+   git checkout pre-release
    patch -Np1 -i "${srcdir}/rogue.patch"
 }
 
