@@ -1,5 +1,6 @@
 
 setenv EPICS_BASE       /opt/epics/base
+setenv MY_EPICS_BASE    /opt/epics/base
 setenv EPICS_EXTENSIONS /opt/epics/extensions
 
 source ${EPICS_BASE}/startup/Site.cshrc

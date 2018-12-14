@@ -1,5 +1,6 @@
 
 export EPICS_BASE=/opt/epics/base
+export MY_EPICS_BASE=/opt/epics/base
 export EPICS_EXTENSIONS=/opt/epics/extensions
 
 source ${EPICS_BASE}/startup/Site.profile
