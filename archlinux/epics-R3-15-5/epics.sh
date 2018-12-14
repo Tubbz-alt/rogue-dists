@@ -2,7 +2,7 @@
 export EPICS_BASE=/opt/epics/base
 export EPICS_EXTENSIONS=/opt/epics/extensions
 
-source ${EPICS_BASE}/startup/Site.sh
+source ${EPICS_BASE}/startup/Site.profile
 
 export EPICS_BASE_BIN=${EPICS_BASE}/bin/${EPICS_HOST_ARCH}
 export EPICS_BASE_LIB=${EPICS_BASE}/lib/${EPICS_HOST_ARCH}
